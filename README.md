@@ -1,1 +1,1 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).# Shi-fu-mi
+The project page link https://shi-fu-mi.surge.sh
