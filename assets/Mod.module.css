@@ -1,0 +1,5 @@
+.background{
+    background-image: url('../assets/images/campaign.jpg');
+    background-size: cover;
+    background-position: left;
+}
