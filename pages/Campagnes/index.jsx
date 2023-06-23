@@ -8,7 +8,7 @@ import { AuthContextProvider } from "../../components/context/AuthContext";
 import NavBar from "../../components/navbar";
 import Footer from "../../components/footer";
 import api from "../../config/api/api";
-import { Label, Modal, Select, TextInput, Textarea } from "flowbite-react";
+import { Button, Label, Modal, Select, TextInput, Textarea } from "flowbite-react";
 import Cookies from "js-cookie";
 
 import styles from "../../assets/Mod.module.css"
@@ -53,12 +53,24 @@ export default function Campaign() {
     // campagnes à afficher  à l'utilisateur
     const [campaigns, setCampaigns] = useState([])
 
-
     //campagens à afficher à l'influenceur connecté
     const [influcamp, setInflucamp] = useState([])
 
+    const [postCamp, setPostCamp] = useState({})
+
+    // information à envyer pour postuler à une campagne
+    const [ctrl, setCtrl] = useState(false)
     const [postulCamp, setPostulCamp] = useState({})
 
+
+    const [marque, setMarque] = useState({})
+    const fetchMarque = async () => {
+        api.getMarque(Cookies.get('userUid')).then((data)=>{
+            setMarque({...data})
+            console.log("set",marque)
+        })
+    }
+    
     //Fonction de publication d'une campagne
     const sendCampaign = async (e) => {
         e.preventDefault();
@@ -67,11 +79,14 @@ export default function Campaign() {
         
         const docRef = await addDoc(collection(db, "campagnes"), {
             userId: Cookies.get('userUid'),
+            marqName: marque.name,
+            marqImg: marque.img,
             title: campagne.title,
             description:campagne.description,
             type:campagne.type,
             dateDeb:campagne.dateDeb,
             dateFin:campagne.dateFin,
+            requir: campagne.requir,
             terms:campagne.terms,
         });
 
@@ -117,11 +132,14 @@ export default function Campaign() {
                 const campagneRef = doc(db, "campagnes", camp.id);
                 const updateData = {
                     userId: Cookies.get('userUid'),
+                    marqName: marque.name,
+                    marqImg: marque.img,
                     title: camp.title,
                     description:camp.description,
                     type:camp.type,
                     dateDeb:camp.dateDeb,
                     dateFin:camp.dateFin,
+                    requir: campagne.requir,
                     terms:camp.terms,
                     image: downloadURL 
                 };
@@ -174,6 +192,7 @@ export default function Campaign() {
     };
 
     useEffect(()=>{
+        fetchMarque();
         fetchContenueTypes();
         fetchCampagnes();
         fetchInflucamp();
@@ -247,9 +266,9 @@ const fetchInflucamp = async () =>{
 }
 
 // Récupération de de l'id de la campagne pour le postulant
-async function postulCampaign(postul){
+async function postCampaign(postul){
     console.log(postul)
-    setPostulCamp(postul);
+    setPostCamp(postul);
     setReOpen(!reopen)
 };
 
@@ -259,6 +278,32 @@ async function closeForm3(){
     setReOpen(!reopen)
 };
 
+
+// fonction de postulation pour une campagne
+async function postulToCampaign(id, title, img, marqId, mqName, marqImage){
+    console.log("postulation")
+    setPostulCamp({
+        campID: id,
+        campTitle: title,
+        campImg: img,
+        marqID: marqId,
+        marqName: mqName,
+        marqImg: marqImage,
+        influID: Cookies.get('userUid'),
+        etat: "en attente"
+    })
+
+    if (postulCamp){
+        console.log(postulCamp)
+        api.postulCampagne(postulCamp)
+        alert("Candidature envoyé avce succès")
+        setReOpen(!reopen)
+
+    }
+
+
+    
+};
 
     return(
         <AuthContextProvider>
@@ -421,12 +466,26 @@ async function closeForm3(){
                                                                 </div>
 
                                                                 <div>
+                                                                    <Label htmlFor="requir" value="Conditions"/>
+                                                                    <Textarea
+                                                                        className="rounded focus:border-purple-400"
+                                                                        id="requir"
+                                                                        type="text"
+                                                                        placeholder="..."
+                                                                        required={true}
+                                                                        shadow={true}
+                                                                        value={campagne.requir}
+                                                                        onChange={(e)=>setCampagne({...campagne,requir:e.target.value})}
+                                                                    />
+                                                                </div>
+
+                                                                <div>
                                                                     <Label htmlFor="terms" value="Termes de contrat"/>
                                                                     <TextInput
                                                                         className="rounded-none focus:border-purple-400"
                                                                         id="terms"
                                                                         type="text"
-                                                                        placeholder="......"
+                                                                        placeholder="..."
                                                                         required={true}
                                                                         shadow={true}
                                                                         value={campagne.terms}
@@ -692,7 +751,7 @@ async function closeForm3(){
                                                     </div>
                                                     <div className="flex bg-white justify-between px-2 py-1">
                                                         <p className="text-xs">Titre: <span className="text-sm">{camp.title}</span></p>
-                                                        <button onClick={()=> postulCampaign(camp)} className="text-sm font-medium text-purple-500 hover:text-purple-600 transition-all ease-in-out duration-700">Postuler</button>
+                                                        <button onClick={()=> postCampaign(camp)} className="text-sm font-medium text-purple-500 hover:text-purple-600 transition-all ease-in-out duration-700">Postuler</button>
                                                     </div>
                                                 </div>
                                             )
@@ -706,15 +765,15 @@ async function closeForm3(){
                                         <Modal.Body>
                                             <div className="flex flex-col space-y-2 text-gray-600 ">
                                                 <div className="p-2 border relative">
-                                                    <img src={postulCamp.image} alt="" className="h-auto lg:h-[500px] w-[1000px]" />
+                                                    <img src={postCamp.image} alt="" className="h-auto lg:h-[500px] w-[1000px]" />
                                                     <div className="absolute bottom-0 flex space-x-2 items-center justify-start bg-zinc-400 w-full -ml-2">
-                                                        <img src={postulCamp.image} alt="" className="h-[55px] w-[90px] p-0.5 z-20" />
-                                                        <p className="text-lg text-white">Nom de la marque</p>
+                                                        <img src={postCamp.marqImg} alt="" className="h-[55px] w-[90px] p-0.5 z-20" />
+                                                        <p className="text-lg text-white">{postCamp.marqName}</p>
                                                     </div>
                                                 </div>
                                                 <div className="p-1 space-y-1">
                                                     <p className="text-sm text-purple-500 font-medium">Description:</p>
-                                                    <p>{postulCamp.description}</p>
+                                                    <p>{postCamp.description}</p>
                                                 </div>
                                                 <div className="p-2 space-y-1 border border-purple-500 rounded-lg">
                                                     <p className="text-sm text-purple-500 font-medium">Conditions:</p>
@@ -724,14 +783,14 @@ async function closeForm3(){
                                                     <div className="flex items-center space-x-4 justify-center">
                                                         <div className="flex space-x-2">
                                                             <div className="flex items-center h-5">
-                                                                <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""/>
+                                                                <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" onChange={()=>setCtrl(true)}/>
                                                             </div>
                                                             <div className="text-sm">
                                                                 <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">J'acceopte les conditions de la campagne</label>
                                                             </div>
                                                         </div>
-                                                        <button className="p-1.5 px-2 text-sm font text-gray-200 rounded-lg bg-purple-400 hover:bg-purple-500 transition-all ease-in-out duration-700">Je postule</button>
-                                                    </div>
+                                                            <Button disabled={!ctrl} onClick={()=> postulToCampaign(postCamp.id, postCamp.title, postCamp.image, postCamp.userId, postCamp.marqName, postCamp.marqImg )} className="px-2 text-sm font text-gray-200 rounded-lg bg-purple-400 hover:bg-purple-500 transition-all ease-in-out duration-700">Je postule</Button>
+                                                      </div>
                                                 </div>
                                             </div>
                                         </Modal.Body>

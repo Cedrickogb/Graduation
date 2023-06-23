@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 
 const marquesCollectionRef=collection(db,'marques');
 const campagnesCollectionRef=collection(db,'campagnes');
+const postulatsCollectionRef=collection(db,'postulats');
 const influenceursCollectionRef=collection(db,'influenceurs');
 const contenueTypesCollectionRef=collection(db,'contenues');
 
@@ -198,7 +199,7 @@ const api = {
         return({id:id,...campaign.data()});
     },
 
-    // mise à jour de campagnez
+    // mise à jour de campagne
 
     async updateCampagne (data){
         const campagne=doc(db,'campagnes',data.id);
@@ -222,7 +223,38 @@ const api = {
     },
       
 
+    // postulation pour une campagne
+    async postulCampagne(data){
+        let fail=true;
+        await addDoc(collection(db,"postulats"),data).then(()=>{
+            fail=false
+        }).catch(()=>{
+            fail=true
+        })
+        return fail
+    },
 
+    // récupérer les postulation de l'influenceur connecter
+    async getPostuls(influ){
+        const q=query(postulatsCollectionRef, where("influID", "==", influ));
+        const querySnapshot = await getDocs(q);
+        const data=[];
+        querySnapshot.forEach((doc) => {
+            data.push({id:doc.id,...doc.data()})
+        });
+        return data;
+    },
+
+    // récupérer les postulation envoyer à la marque connecté
+    async getMarqPostul(marq){
+        const q=query(postulatsCollectionRef, where("marqID", "==", marq), where ("etat", "==", "en attente"));
+        const querySnapshot = await getDocs(q);
+        const data=[];
+        querySnapshot.forEach((doc) => {
+            data.push({id:doc.id,...doc.data()})
+        });
+        return data;
+    },
       
 
 

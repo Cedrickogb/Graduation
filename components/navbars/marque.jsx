@@ -41,7 +41,7 @@ export default function  MarqNav () {
                     <div className="space-x-2 text-base -mr-32 flex items-center justify-center">
                         <Link href="/" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Influenceurs</Link>
                         <Link href="/Campagnes" target="blank" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Campagnes</Link>
-                        <Link href="/chats/marque" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Messages</Link>
+                        <Link href="/chats" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Messages</Link>
                     </div>
                     </div>
                     <div className="flex items-center justify-between space-x-2 mr-6">

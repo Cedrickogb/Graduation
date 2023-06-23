@@ -41,7 +41,7 @@ export default function  InfluNav () {
                   <div>
                     <div className="space-x-2 text-base -mr-32 flex items-center justify-center">
                         <Link href="/" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Campagnes</Link>
-                        <Link href="/chats/influenceur" target="blank" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Messages</Link>
+                        <Link href="/chats" target="blank" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Messages</Link>
                         <Link href="/statistiques" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Stats</Link>
                     </div>
                   </div>
@@ -72,13 +72,13 @@ export default function  InfluNav () {
                         </button>
                         <div className="absolute top-11 -right-0 text-sm">
                             <div className={` flex flex-col items-start justify-end ml-5 p-2 text-md animate-smooth ${open? 'translate-y-0':'hidden'}`}>
-                                <a to="/" className="flex items-center justify-center space-x-3 p-3  transition-all duration-500 hover:bg-slate-100 bg-slate-100 w-full">
+                                <Link href="/profil" className="bg-zinc-700 hover:text-purple-400 flex items-center justify-center space-x-3 p-3  transition-all duration-500 w-full">
                                     Profil
-                                </a>
-                                <button onClick={logout} className="flex items-center justify-center space-x-3 p-3  transition-all duration-500 hover:bg-slate-100 bg-slate-100 w-full">
+                                </Link>
+                                <button onClick={logout} className="border-t border-zinc-200 bg-zinc-700 hover:text-purple-400 flex items-center justify-center space-x-3 p-3  transition-all duration-500 w-full">
                                     Se Déconnecter
                                 </button>
-                            </div>                            
+                            </div>                                 
                         </div>
                       </div>
                   </div>
