@@ -11,6 +11,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors:{
+        "blaack":"rgba(8, 1, 5, 2)",
+        "whiite":"rgba(151, 160, 170, 0.1)",
+        "grey":"rgba(111, 110, 120, 0.4)",
+        "purp":"rgba(133, 125, 250, 0.4)"
+      },
       keyframes: {
         slidetoleft: {
           'from': { transform: 'translateX(150%)' },

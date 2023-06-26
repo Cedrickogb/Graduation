@@ -2,7 +2,6 @@ import {db, auth,storage} from '../../config/firebase.config'
 import {setDoc,updateDoc, collection,getDocs,getDoc,doc,deleteDoc, serverTimestamp, addDoc} from 'firebase/firestore'
 import {ref,uploadString, getDownloadURL, uploadBytes } from "firebase/storage";
 
-
 import React, { useEffect, useRef, useState } from "react";
 import { AuthContextProvider } from "../../components/context/AuthContext";
 import NavBar from "../../components/navbar";
@@ -16,6 +15,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import EditCampaign from "../../components/campagnes/editCampaign";
 import IdContexte from "../../components/context/EditContext";
+
+import Img from "../../assets/images/campa.jpg"
 
 export default function Campaign() {
     const campagnesCollectionRef=collection(db,'campagnes');
@@ -364,17 +365,16 @@ async function postulToCampaign(id, title, img, marqId, mqName, marqImage){
                             {/* div contenant les deux types de modal concernant les campagnes */}
                             <div>
                                 {/* Modal contenant le formulaire de publication d'une campagne */}
-                                <Modal show={open} size="5xl" popup={true} onClose={()=>closeForm()} className="" >
+                                <Modal show={open} size="6xl" popup={true} onClose={()=>closeForm()} className="" >
                                     <Modal.Header/>
                                     <Modal.Body>
-                                        <div className="p-1 bg-zinc-100 rounded-lg flex flex-col justify-center items-center w-full">
+                                        <div className="p-1 bg-zinc-100 rounded-lg flex flex-col justify-center items-center w-full animate-slidedown">
                                             <hi className="text-2xl font-medium text-purple-500 m-2">Créer votre campagne</hi>
                                             <div className="flex flex-col lg:flex-row w-full p-1 sm:p-2">
-                                                <div className={`bg-cover relative bg-center bg-white bg-no-repeat lg:w-1/3 shadow-xl ${styles.background}`} >
-
+                                                <div className={`bg-cover relative bg-left bg-no-repeat lg:w-1/3 shadow-xl ${styles.background}`} >
                                                 </div>
 
-                                                <div className="w-2/3 bg-white">
+                                                <div className="lg:w-2/3 bg-white">
                                                     <div className="p-2 shadow-xl">
                                                         <div className="p-2 space-y-2">
                                                             <div className="space-y-2">
@@ -466,7 +466,7 @@ async function postulToCampaign(id, title, img, marqId, mqName, marqImage){
                                                                 </div>
 
                                                                 <div>
-                                                                    <Label htmlFor="requir" value="Conditions"/>
+                                                                    <Label htmlFor="requir" value="Conditions à remplir pour postuler"/>
                                                                     <Textarea
                                                                         className="rounded focus:border-purple-400"
                                                                         id="requir"
@@ -725,6 +725,9 @@ async function postulToCampaign(id, title, img, marqId, mqName, marqImage){
                     <NavBar/>
                     <IdContexte.Provider value={val}>
                         <div className="py-20 mt-20">
+                            <div>
+                                <p className="text-purple-500 font-semibold text-4xl text-center">Campagnes disponibles</p>
+                            </div>
 
                             <div className="bg-gray-100 p-2 lg:m-2">
                                 
@@ -735,7 +738,7 @@ async function postulToCampaign(id, title, img, marqId, mqName, marqImage){
                                             return(
                                                 <div className="flex flex-col p-1 lg:p-2 m-1 lg:m-2 border relative">
                                                     <div className="flex bg-white justify-between p-2">
-                                                        <p className="text-sm">Type: {camp.type.id} </p>
+                                                        <p className="text-sm">Type: {camp.type.type} </p>
                                                         <button className="text-purple-500 rounded-full hover:bg-zinc-100 p-0.5">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
@@ -777,7 +780,7 @@ async function postulToCampaign(id, title, img, marqId, mqName, marqImage){
                                                 </div>
                                                 <div className="p-2 space-y-1 border border-purple-500 rounded-lg">
                                                     <p className="text-sm text-purple-500 font-medium">Conditions:</p>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo consequatur vitae harum, laboriosam laborum corrupti eos quam optio. Odio non iure laboriosam fugiat voluptates quo culpa veritatis ex neque fugit.</p>
+                                                    <p>{postCamp.requir}</p>
                                                 </div>
                                                 <div className="p-1 mt-6 space-y-1 justify-items-end grid">
                                                     <div className="flex items-center space-x-4 justify-center">

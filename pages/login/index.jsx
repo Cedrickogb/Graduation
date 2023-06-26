@@ -162,11 +162,11 @@ export default function Login() {
 
                   <Button type="submit" className="flex justify-center items-center w-full text-white bg-purple-500 hover:bg-purple-600 transition-all ease-in-out duration-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-2 py-1 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                       {loading&&<Spinner className='mr-4'/>}
-                      Sign in
+                      Se connecter
                   </Button>
-                  <div className="flex text-sm">
+                  <div className="flex text-sm justify-between">
                     <p>Je n'ai pas un compte?</p>
-                    <a href="/Inscriptions/Marque" className="ml-2">S'inscrire</a>
+                    <a href="/" className="ml-2 text-purple-600 font-medium">S'inscrire</a>
                   </div>
                   
 

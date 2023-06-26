@@ -26,7 +26,7 @@ export default function  NavBar () {
     return (
         <div>
             <div className="">
-              <div className="w-full bg-zinc-900 text-gray-300 text-sm fixed top-0 z-10">
+              <div className="w-full bg-zinc-900 text-gray-300 text-sm fixed top-0 z-20">
                   {handleNavBar()}
               </div>
             </div>

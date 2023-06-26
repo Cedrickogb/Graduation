@@ -11,14 +11,14 @@ export default function DefaultHome(){
                 <div className='absolute xl:top-0 xl:left-52 bg-pink-700 opacity-30 w-48 h-48 rounded-full blur-2xl -z-10'></div>
                 <div className='absolute xl:-bottom-6 xl:left-96 bg-amber-400 opacity-30 w-52 h-52 rounded-full blur-xl -z-10'></div>
                 <div className="flex justify-center items-center p-2 px-40">
-                    <div className="space-y-10 p-1 -mt-24 -mr-">
+                    <div className="space-y-10 p-1 -mt-24 -mr- animate-slidetoleft">
                         <p className="text-5xl font-bold text-zinc-800 w-3/4">Technologie et campagne d'influence pour les plus belles marques</p>
                         <div className="flex space-x-4 text-sm">
-                            <p className="py-2 px-4 bg-purple-500 hover:bg-purple-700 transition-all duration-700 ease-in-out text-gray-200 rounded-lg">Je suis une marque / entreprise</p>
+                            <Link href="/marques" className="py-2 px-4 bg-purple-500 hover:bg-purple-700 transition-all duration-700 ease-in-out text-gray-200 rounded-lg">Je suis une marque / entreprise</Link>
                             <Link href="/influenceurs" className="py-2 px-4 bg-purple-500 hover:bg-purple-700 transition-all duration-700 ease-in-out text-gray-200 rounded-lg">Je suis un influenceur</Link>
                         </div>
                     </div>
-                    <div className="relative">
+                    <div className="relative animate-slidedown">
                         <Image src={Phone} alt="" className="h-[450px] w-[1500px]" />
                         <div className="absolute top-12 right-0">
                             <div className="relative">
