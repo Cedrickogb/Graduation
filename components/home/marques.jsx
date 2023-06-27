@@ -1,9 +1,18 @@
 import React from "react";
+import { useRouter } from "next/router";
 
-export default function MarqHome(){
+export default function MarqeHome(){
+
+    const redirectToPage = () => {
+        const router = useRouter();
+        router.push('/influenceurs');
+      };
+
+    redirectToPage();
+    
     return(
         <div>
-            <p className="text-center">Liste des influenceurs</p>
+
         </div>
     )
 }

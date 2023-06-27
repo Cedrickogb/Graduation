@@ -255,6 +255,26 @@ const api = {
         });
         return data;
     },
+
+    async getMarqPostulAccep(marq){
+        const q=query(postulatsCollectionRef, where("marqID", "==", marq), where ("etat", "==", "Accepté"));
+        const querySnapshot = await getDocs(q);
+        const data=[];
+        querySnapshot.forEach((doc) => {
+            data.push({id:doc.id,...doc.data()})
+        });
+        return data;
+    },
+
+    async getMarqPostulRej(marq){
+        const q=query(postulatsCollectionRef, where("marqID", "==", marq), where ("etat", "==", "Rejeté"));
+        const querySnapshot = await getDocs(q);
+        const data=[];
+        querySnapshot.forEach((doc) => {
+            data.push({id:doc.id,...doc.data()})
+        });
+        return data;
+    },
       
 
 

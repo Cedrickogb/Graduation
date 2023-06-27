@@ -35,9 +35,9 @@ export default function  InfluNav () {
         <div>
 
               <nav className="flex p-4 justify-between">
-                  <div>
-                      <img src="" alt=""/>
-                  </div>
+                    <div class="flex items-center justify-center p-1">
+                        <a href="/" className="text-whitee text-xl font-medium">INFLUEN<span className="text-purple-700">X</span></a>
+                    </div>
                   <div>
                     <div className="space-x-2 text-base -mr-32 flex items-center justify-center">
                         <Link href="/" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Campagnes</Link>
@@ -50,7 +50,6 @@ export default function  InfluNav () {
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                             <path fill-rule="evenodd" d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z" clip-rule="evenodd" />
                         </svg>
-                        {/* <span className="absolute rounded-full bg-red-500 p-1 top-0 right-1"></span> */}
                       </button>
                       <div className="">
                         <button className="flex items-center justify-between space-x-2 text-sm" onClick={() => setOpen(!open)}>

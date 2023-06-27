@@ -34,12 +34,12 @@ export default function  MarqNav () {
         <div>
             <div>
                 <nav className="flex p-4 justify-between">
-                    <div>
-                        <img src="" alt=""/>
+                    <div class="flex items-center justify-center p-1">
+                        <a href="/" className="text-whitee text-xl font-medium">INFLUEN<span className="text-purple-700">X</span></a>
                     </div>
                     <div>
                     <div className="space-x-2 text-base -mr-32 flex items-center justify-center">
-                        <Link href="/" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Influenceurs</Link>
+                        <Link href="/influenceurs" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Influenceurs</Link>
                         <Link href="/Campagnes" target="blank" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Campagnes</Link>
                         <Link href="/chats" className="p-2 hover:text-purple-500  transition-all ease-in-out duration-700 text-sm">Messages</Link>
                     </div>

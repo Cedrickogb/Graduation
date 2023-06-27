@@ -61,34 +61,55 @@ export default function InfluHome(){
                         </>
                     }
                     {user === "marque" &&
-                        <div className="bg-zinc-300">
+                        <div className="">
                             <div>
                                 <div>
-                                    <p className="text-2xl font-medium text-purple-500 text-center">Liste des inluenceurs</p>
+                                    <p className="text-2xl font-bold text-purple-500 text-center">Liste des inluenceurs</p>
                                 </div>
-                                <div className="flex flex-col bg-zinc-200 p-2">
-                                    {
-                                        influenceurs?.map( (influ) => {
-                                            return(
-                                                <div className="flex items-center bg-white h-24 border p-3 m-2">
-                                                    <div>
-                                                        <img src={influ.img} className="h-20 w-20 rounded-full" width={80} height={80}/>
+                                <div className="flex flex-col p-4 mx-20">
+                                    <div className="bg-zinc-200 p-2 rounded-lg">
+                                        {
+                                            influenceurs?.map( (influ) => {
+                                                return(
+                                                    <div className="flex items-center rounded-lg bg-white h-24 border p-4 m-2 relative animate-slidetoleft">
+                                                        <div>
+                                                            <img src={influ.img} className="h-20 w-20 rounded-full" width={80} height={80}/>
+                                                        </div>
+                                                        <div className="flex space-x-4 justify-center items-center p-2">
+                                                            <p className="text-sm">Nom: <span className="text-base text-purple-700 font-medium">{influ.lastName}</span></p>
+                                                            <p className="text-sm">Prenom: <span className="text-base text-purple-700 font-medium">{influ.firstName}</span></p>
+                                                        </div>
+                                                        <div className="flex space-x-4 justify-center items-center p-2 absolute right-60">
+                                                            <p className="text-sm">Sexe: <span className="text-base text-purple-700 font-medium">{influ.sex}</span></p>
+                                                            <p className="text-sm">Type de contenue: <span className="text-base text-purple-700 font-medium">{influ.typeCont}</span></p>
+                                                            <p className="text-sm">Langue: <span className="text-base text-purple-700 font-medium">Francais</span></p>
+                                                        </div>
+                                                        <div className="text-zinc-100 flex justify-center space-x-4 items-center absolute right-6 text-sm">
+                                                            <button className="bg-purple-500 hover:bg-purple-600 transition-all ease-in-out duration-700 py-1.5 px-3 rounded-lg ">Profil</button>
+                                                            <button className="bg-purple-500 hover:bg-purple-600 transition-all ease-in-out duration-700 py-1.5 px-3 rounded-lg ">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                                                                </svg>
+                                                            </button>
+                                                            <div className="flex space-x-0">
+                                                                <button className="text-zinc-700 hover:bg-zinc-300 rounded-full p-1 transition-all ease-in-out duration-500">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                    </svg>
+                                                                </button>
+                                                                <button className="text-zinc-700 hover:bg-zinc-300 rounded-full p-1 transition-all ease-in-out duration-500">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div className="flex flex-col space-x-2 justify-start items-center">
-                                                        <p>Nom: <span>{influ.lastName}</span></p>
-                                                        <p>Prenom: <span>{influ.firstName}</span></p>
-                                                    </div>
-                                                    <div className="flex justify-center items-center">
-                                                        <button>Profil</button>
-                                                        <button>
-
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                )
+                                            }
                                             )
                                         }
-                                        )
-                                    }
+                                    </div>
                                 </div>
                             </div>
                         </div>
