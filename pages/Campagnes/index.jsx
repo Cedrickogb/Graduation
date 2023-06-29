@@ -291,13 +291,14 @@ async function postulToCampaign(id, title, img, marqId, mqName, marqImage){
         marqName: mqName,
         marqImg: marqImage,
         influID: Cookies.get('userUid'),
+        influName:"",
         etat: "en attente"
     })
 
     if (postulCamp){
         console.log(postulCamp)
         api.postulCampagne(postulCamp)
-        alert("Candidature envoyé avce succès")
+        alert("Candidature envoyé avec succès")
         setReOpen(!reopen)
 
     }

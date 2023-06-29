@@ -63,7 +63,7 @@ export default function MarqChat(){
             etat:"Rejeté"
         };
         await updateDoc(campagneRef, updateData)
-        alert("Candidature réjeté avce succès")
+        alert("Candidature réjeté avec succès")
     };
 
     const fecthCandidat = async () => {
